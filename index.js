@@ -88,10 +88,10 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
         	if(greetings.indexOf(event.message.text) > -1)
         	{
-
+        		handleGreeting(event.message.text);
         		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
         	}
-            sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+            //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
     }
     res.sendStatus(200);
