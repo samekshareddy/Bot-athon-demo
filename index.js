@@ -123,7 +123,7 @@ app.post('/webhook', function (req, res) {
         		handleScheduleReminders(event.sender.id,message);
         	}
 
-        	if(event.message.text.indexOf('weather'))
+        	if(event.message.text.indexOf('weather') > -1)
         	{
         		console.log('weather');
         		//handleComplaints(event.sender.id,message);
