@@ -58,6 +58,12 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 var flag = 0;
+var cities =[];
+var to = "";
+var from = "";
+var when ="";
+var number_tickets;
+var text_numbers = ["one","two","three","four","five","six","seven","eight","nine","ten"];
 
 
 var greetings = ['hi', 'hello', 'good morning', 'good afternoon'];
@@ -86,11 +92,7 @@ app.post('/webhook', function (req, res) {
 
     var events = req.body.entry[0].messaging;
     var reply = "Sorry I did not understand";
-    var cities =[];
-    var to = "";
-    var from = "";
-    var when ="";
-    var number_tickets;
+    
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
@@ -153,11 +155,35 @@ app.post('/webhook', function (req, res) {
 
         		sendMessage(event.sender.id,{text: "No of tickets:"})
         	}
-        	if(!isNaN(event.message.text))
+        	if(!isNaN(event.message.text) || text_numbers.indexOf(event.message.text) > -1)
         	{
+        		
         		console.log("Valid number");
         		number_tickets = event.message.text;
-        		sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
+        		message = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": "Flight",
+                            "subtitle": "https://postimg.org/image/s20y5am5p/",
+                            "image_url": "https://postimg.org/image/s20y5am5p/" ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": "https://postimg.org/image/s20y5am5p/",
+                                "title": "Show kitten"
+                                }, {
+                                "type": "postback",
+                                "title": "I like this",
+                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            }]
+                        }]
+                    }
+                }
+            };
+        	sendMessage(event.send.id,message);
+        	sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
         	}
 
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
