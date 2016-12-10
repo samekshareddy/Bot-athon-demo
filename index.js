@@ -205,7 +205,7 @@ app.post('/webhook', function (req, res) {
       if(event.message.text.toLowerCase().indexOf('weather') > -1 || event.message.text.toLowerCase().indexOf('temperature') || event.message.text.toLowerCase().indexOf('feel') )
       {
       	console.log('in weather');
-      	var city = event.message.text.substring()
+      	var city = "";
 
       	cities.forEach(function(value){
   		console.log(value);
