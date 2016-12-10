@@ -128,7 +128,7 @@ app.post('/webhook', function (req, res) {
         			sendMessage(event.sender.id,{text: "Please enter your destination"});
         			flag = 1;
         		}
-        		if(flag==1)
+        		else
         		{
         			to = event.message.text;
         			sendMessage(event.sender.id,{text: "Please enter the number of tickets"});
@@ -156,6 +156,7 @@ app.post('/webhook', function (req, res) {
         	{
         		console.log("Valid number");
         		number_tickets = event.message.text;
+        		sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+To});
         	}
 
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
