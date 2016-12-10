@@ -83,8 +83,11 @@ app.get('/webhook', function (req, res) {
 app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     var reply = "Sorry I did not understand";
+    var cities =[];
     var to = "";
     var from = "";
+    var when ="";
+    var number_tickets;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
@@ -116,11 +119,25 @@ app.post('/webhook', function (req, res) {
 
         	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('Bangalore') > -1)
         	{
-        		var cities = event.message.text.toString().split(" ");
+        		var cities = event.message.text.toString().split(",");
         		from = cities[0];
         		to = cities[1];
-        		sendMessage(event.sender.id,{text:from+" "+to});
+
+        		sendMessage(recipientid,{text: "When do you plan to leave"});
+
+        		//sendMessage(event.sender.id,{text:from+" "+to});
+
+        		//cites.push(event.message.text);
         	}
+
+        	if(!isNaN(new Date(event.message.text).getDate()))
+        	{
+        		console.log("Valid date");
+        		when = event.message.text;
+
+        		sendMessage(recipientid,{text: "No of tickets:"})
+        	}
+
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
     }
@@ -129,7 +146,7 @@ app.post('/webhook', function (req, res) {
 
 function handleFindFlights(recipientid,message)
 {
-	sendMessage(recipientid,{text:"Please provide source and destination"});
+	sendMessage(recipientid,{text:"Please provide source,destination"});
 }
 
 function handleComplaints(recipientid,message)
