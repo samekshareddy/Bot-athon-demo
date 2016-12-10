@@ -251,10 +251,10 @@ app.post('/webhook', function (req, res) {
 
       }*/
 
-      else
+      /*else
       {
       	sendMessage(event.sender.id,{text: 'Sorry I did not understand'});
-      }
+      }*/
     res.sendStatus(200);
 });
 
