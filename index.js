@@ -197,7 +197,7 @@ app.post('/webhook', function (req, res) {
     }
 
     if (event.postback) {
-        let text = JSON.stringify(event.postback)
+        //text = JSON.stringify(event.postback)
         sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
         continue
       }
