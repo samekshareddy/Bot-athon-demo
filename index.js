@@ -145,7 +145,7 @@ function handleScheduleReminders(recipientid,message)
 function handleGreeting(recipientid,message)
 {
 	var reply = reply = message + "! We are here to help you find the cheapest flights across the world";
-	sendMessage(recipientid,{text: reply});
+	await sendMessage(recipientid,{text: reply});
 	request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: PAGE_ACCESS_TOKEN },
@@ -184,7 +184,7 @@ function handleGreeting(recipientid,message)
     });
 }
 //process.env.PAGE_ACCESS_TOKEN
-function sendMessage(recipientId, message) {
+function  async sendMessage(recipientId, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: PAGE_ACCESS_TOKEN },
