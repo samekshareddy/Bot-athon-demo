@@ -175,9 +175,8 @@ app.post('/webhook', function (req, res) {
                                 "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_1.jpg",
                             }]
                         }]
-                    }
-                },
-                "attachment": {
+                    },
+                    {
                     "type": "template",
                     "payload": {
                         "template_type": "generic",
@@ -191,9 +190,8 @@ app.post('/webhook', function (req, res) {
                                 "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_2.jpg",
                             }]
                         }]
-                    }
-                },
-                "attachment": {
+                    },
+                    {
                     "type": "template",
                     "payload": {
                         "template_type": "generic",
