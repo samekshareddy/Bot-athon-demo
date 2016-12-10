@@ -58,7 +58,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 var flag = 0;
-var cities =[];
+var cities =['dilli','delhi','bangalore','bglr'];
 var to = "";
 var from = "";
 var when ="";
@@ -122,7 +122,7 @@ app.post('/webhook', function (req, res) {
         		handleScheduleReminders(event.sender.id,message);
         	}
 
-        	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('bangalore') > -1)
+        	if(cities.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("In cities")
         		if(flag==0)
@@ -198,7 +198,7 @@ app.post('/webhook', function (req, res) {
 
     if (event.postback) {
         //text = JSON.stringify(event.postback)
-        sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
+        sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
       }
     res.sendStatus(200);
 });
