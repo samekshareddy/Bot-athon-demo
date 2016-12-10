@@ -59,6 +59,7 @@ var request = require('request');
 var app = express();
 var flag = 0;
 var cities =['dilli','delhi','bangalore','bglr'];
+var weather = ['temperature','feel','weather'];
 var to = "";
 var from = "";
 var when ="";
@@ -196,9 +197,29 @@ app.post('/webhook', function (req, res) {
         }
     }
 
-    if (event.postback) {
+     if(event.postback) {
         //text = JSON.stringify(event.postback)
         sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
+      }
+
+      if(weather.indexOf(event.sender.text.toLowerCase()) > -1)
+      {
+      	var city = event.sender.text.substring()
+
+      	cities.forEach(function(value){
+  		console.log(value);
+  		if(event.sender.text.toLowerCase().indexOf(value) > -1)
+  		{
+  			city = event.sender.text.substring(event.sender.text.toLowerCase().indexOf(value));
+  			sendMessage(event.sender.id,{text: 'Weather at'+city+'27 degrees'});
+  		}
+		});
+
+      }
+
+      else
+      {
+      	sendMessage(event.sender.id,{text: 'Sorry I did not understand'});
       }
     res.sendStatus(200);
 });
