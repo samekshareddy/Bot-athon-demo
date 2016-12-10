@@ -108,7 +108,7 @@ function handleGreeting(recipientid,message)
         qs: {access_token: PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: {
-            recipient: {id: recipientId},
+            recipient: {id: recipientid},
             message: {
     			"text":"Pick a color:",
     			"quick_replies":[
