@@ -110,7 +110,7 @@ app.post('/webhook', function (req, res) {
         		console.log("Find Flights");
 
         		//handleFindFlights(event.sender.id,event.message.text);
-        		sendMessage(recipientid,{text:"Please provide source"});
+        		sendMessage(event.sender.id,{text:"Please provide source"});
         		res.send("Please provide source");
 
         	}
