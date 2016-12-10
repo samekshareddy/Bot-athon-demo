@@ -160,7 +160,7 @@ app.post('/webhook', function (req, res) {
         		
         		console.log("Valid number");
         		number_tickets = event.message.text;
-        	messageData = {
+        	message = {
         			"attachment": {
             					"type": "template",
             					"payload": {
