@@ -202,7 +202,8 @@ app.post('/webhook', function (req, res) {
         sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
       }
 
-      if(event.message.text.toLowerCase().indexOf('weather') > -1 || event.message.text.toLowerCase().indexOf('temperature') || event.message.text.toLowerCase().indexOf('feel') )
+      if(event.message.text.toLowerCase().indexOf('weather') > -1 )
+      	//|| event.message.text.toLowerCase().indexOf('temperature') || event.message.text.toLowerCase().indexOf('feel') )
       {
       	console.log('in weather');
       	var city = "";
