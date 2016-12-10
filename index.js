@@ -123,7 +123,7 @@ app.post('/webhook', function (req, res) {
         		from = cities[0];
         		to = cities[1];
 
-        		sendMessage(recipientid,{text: "When do you plan to leave"});
+        		sendMessage(event.sender.id,{text: "When do you plan to leave"});
 
         		//sendMessage(event.sender.id,{text:from+" "+to});
 
@@ -135,7 +135,7 @@ app.post('/webhook', function (req, res) {
         		console.log("Valid date");
         		when = event.message.text;
 
-        		sendMessage(recipientid,{text: "No of tickets:"})
+        		sendMessage(event.sender.id,{text: "No of tickets:"})
         	}
 
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
