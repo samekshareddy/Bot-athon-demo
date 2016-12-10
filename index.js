@@ -202,15 +202,16 @@ app.post('/webhook', function (req, res) {
         sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
       }
 
-      if(weather.indexOf(event.sender.text.toLowerCase()) > -1)
+      if(weather.indexOf(event.message.text.toLowerCase()) > -1)
       {
-      	var city = event.sender.text.substring()
+      	console.log('in weather');
+      	var city = event.message.text.substring()
 
       	cities.forEach(function(value){
   		console.log(value);
-  		if(event.sender.text.toLowerCase().indexOf(value) > -1)
+  		if(event.message.text.toLowerCase().indexOf(value) > -1)
   		{
-  			city = event.sender.text.substring(event.sender.text.toLowerCase().indexOf(value));
+  			city = event.message.text.substring(event.message.text.toLowerCase().indexOf(value));
   			sendMessage(event.sender.id,{text: 'Weather at'+city+'27 degrees'});
   		}
 		});
