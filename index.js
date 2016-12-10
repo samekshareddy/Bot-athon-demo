@@ -133,7 +133,7 @@ app.post('/webhook', function (req, res) {
 		  		if(event.message.text.toLowerCase().indexOf(value) > -1)
 		  		{
 		  			city = event.message.text.substring(event.message.text.toLowerCase().indexOf(value));
-		  			sendMessage(event.sender.id,{text: 'Weather at'+city+'27 degrees'});
+		  			sendMessage(event.sender.id,{text: 'Weather at '+city+' 27 degrees'});
 		  		}
 				});
         		//handleComplaints(event.sender.id,message);
