@@ -57,6 +57,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+var flag = 0;
+
 
 var greetings = ['hi', 'hello', 'good morning', 'good afternoon'];
 
@@ -81,6 +83,7 @@ app.get('/webhook', function (req, res) {
 });
 
 app.post('/webhook', function (req, res) {
+
     var events = req.body.entry[0].messaging;
     var reply = "Sorry I did not understand";
     var cities =[];
@@ -119,11 +122,23 @@ app.post('/webhook', function (req, res) {
 
         	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('Bangalore') > -1)
         	{
-        		var cities = event.message.text.toString().split(" ");
+        		if(flag==0)
+        		{
+        			from =event.message.text;
+        			sendMessage(event.sender.id,{text: "Please enter your destination"});
+        			flag = 1;
+        		}
+        		if(flag==1)
+        		{
+        			to = event.message.text;
+        			sendMessage(event.sender.id,{text: "Please enter the number of tickets"});
+        			flag=0;
+        		}
+        		/*var cities = event.message.text.toString().split(" ");
         		from = cities[0];
         		to = cities[1];
 
-        		sendMessage(event.sender.id,{text: "When do you plan to leave"});
+        		sendMessage(event.sender.id,{text: "When do you plan to leave"});*/
 
         		//sendMessage(event.sender.id,{text:from+" "+to});
 
@@ -136,6 +151,11 @@ app.post('/webhook', function (req, res) {
         		when = event.message.text;
 
         		sendMessage(event.sender.id,{text: "No of tickets:"})
+        	}
+        	if(!isNaN(event.message.text))
+        	{
+        		console.log("Valid number");
+        		number_tickets = event.message.text;
         	}
 
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
