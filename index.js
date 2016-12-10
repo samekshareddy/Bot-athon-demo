@@ -116,7 +116,7 @@ app.post('/webhook', function (req, res) {
 
         	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('Bangalore') > -1)
         	{
-        		var cities = event.message.text.toString().split(",");
+        		var cities = event.message.text.toString().split(" ");
         		from = cities[0];
         		to = cities[1];
         		sendMessage(event.sender.id,{text:from+" "+to});
