@@ -120,7 +120,7 @@ app.post('/webhook', function (req, res) {
         		handleScheduleReminders(event.sender.id,message);
         	}
 
-        	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('Bangalore') > -1)
+        	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('bangalore') > -1)
         	{
         		if(flag==0)
         		{
@@ -167,7 +167,7 @@ app.post('/webhook', function (req, res) {
 
 function handleFindFlights(recipientid,message)
 {
-	sendMessage(recipientid,{text:"Please provide source,destination"});
+	sendMessage(recipientid,{text:"Please provide source"});
 }
 
 function handleComplaints(recipientid,message)
