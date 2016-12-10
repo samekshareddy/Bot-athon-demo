@@ -58,6 +58,10 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 
+var greetings = ['Hi', 'Hello', 'Good Morning', 'Good Afternoon'];
+
+var PAGE_ACCESS_TOKEN = 'EAAIPsW7F6tMBAElxTAq2i6ypobzJF1AQIweS1zZBCZCmzc80GSSQiM8n0fyuWKZB4H1Ci90cBSrZBzamp0qcHGXMAr2Xy4JRf6FDeghf1TFGZCrWZBXffZAwi1mrmm0Q1Y6uaeNEPUcCMUmOl67DkwZAO8ThBwrNmRs563n9vHsMoAZDZD'
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
@@ -78,20 +82,32 @@ app.get('/webhook', function (req, res) {
 
 app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
+    var reply = "Sorry I did not understand";
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
+        	if(greetings.indexOf(event.message.text) > -1)
+        	{
+
+        		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
+        	}
             sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
     }
     res.sendStatus(200);
 });
 
+
+function handleGreeting(message)
+{
+	var reply = reply = event.message.text + "We are here to help you find the cheapest flights across the world";
+	sendMessage(event.sender.id,reply);
+}
 //process.env.PAGE_ACCESS_TOKEN
 function sendMessage(recipientId, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: 'EAAIPsW7F6tMBAElxTAq2i6ypobzJF1AQIweS1zZBCZCmzc80GSSQiM8n0fyuWKZB4H1Ci90cBSrZBzamp0qcHGXMAr2Xy4JRf6FDeghf1TFGZCrWZBXffZAwi1mrmm0Q1Y6uaeNEPUcCMUmOl67DkwZAO8ThBwrNmRs563n9vHsMoAZDZD'  },
+        qs: {access_token: PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: {
             recipient: {id: recipientId},
