@@ -58,7 +58,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 
-var greetings = ['Hi', 'Hello', 'Good Morning', 'Good Afternoon'];
+var greetings = ['hi', 'hello', 'good morning', 'good afternoon'];
 
 var PAGE_ACCESS_TOKEN = 'EAAIPsW7F6tMBAElxTAq2i6ypobzJF1AQIweS1zZBCZCmzc80GSSQiM8n0fyuWKZB4H1Ci90cBSrZBzamp0qcHGXMAr2Xy4JRf6FDeghf1TFGZCrWZBXffZAwi1mrmm0Q1Y6uaeNEPUcCMUmOl67DkwZAO8ThBwrNmRs563n9vHsMoAZDZD'
 
@@ -86,7 +86,7 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-        	if(greetings.indexOf(event.message.text) > -1)
+        	if(greetings.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("greetings");
         		handleGreeting(event.sender.id,event.message.text);
@@ -101,8 +101,38 @@ app.post('/webhook', function (req, res) {
 
 function handleGreeting(recipientid,message)
 {
-	var reply = reply = message + "We are here to help you find the cheapest flights across the world";
+	var reply = reply = message + "! We are here to help you find the cheapest flights across the world";
 	sendMessage(recipientid,{text: reply});
+	request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        json: {
+            recipient: {id: recipientId},
+            message: {
+    			"text":"Pick a color:",
+    			"quick_replies":[
+      			{
+        			"content_type":"text",
+        			"title":"Red",
+        			"payload":"Red"
+      			},
+      			{
+        			"content_type":"text",
+        			"title":"Green",
+        			"payload":"Red",
+        			
+      			}
+    		]
+  		}
+      }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error in quick reply: ', error);
+        } else if (response.body.error) {
+            console.log('Error Quick reply: ', response.body.error);
+        }
+    });
 }
 //process.env.PAGE_ACCESS_TOKEN
 function sendMessage(recipientId, message) {
