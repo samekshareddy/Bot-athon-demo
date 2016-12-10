@@ -145,8 +145,19 @@ function handleScheduleReminders(recipientid,message)
 function handleGreeting(recipientid,message)
 {
 	var reply = reply = message + "! We are here to help you find the cheapest flights across the world";
-	await sendMessage(recipientid,{text: reply});
+	//sendMessage(recipientid,{text: reply});
+
 	request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        json: {
+            recipient: {id: recipientId},
+            message: message,
+        }
+    }, function(error, response, body) {
+        
+    	request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: PAGE_ACCESS_TOKEN },
         method: 'POST',
@@ -182,9 +193,16 @@ function handleGreeting(recipientid,message)
             console.log('Error Quick reply: ', response.body.error);
         }
     });
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
+	
 }
 //process.env.PAGE_ACCESS_TOKEN
-function  async sendMessage(recipientId, message) {
+function sendMessage(recipientId, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: PAGE_ACCESS_TOKEN },
