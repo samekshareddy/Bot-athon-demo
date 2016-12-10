@@ -114,12 +114,12 @@ app.post('/webhook', function (req, res) {
         		handleScheduleReminders(event.sender.id,message);
         	}
 
-        	if(event.message.text.indexOf('Delhi') > -1 || event.message.text.indexOf('Bangalore') > -1)
+        	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('Bangalore') > -1)
         	{
         		var cities = event.message.text.toString().split(",");
         		from = cities[0];
         		to = cities[1];
-        		sendMessage(sender.message.id,from+" "+to);
+        		sendMessage(sender.message.id,{text:from+" "+to});
         	}
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
