@@ -102,7 +102,7 @@ app.post('/webhook', function (req, res) {
 function handleGreeting(recipientid,message)
 {
 	var reply = reply = message + "We are here to help you find the cheapest flights across the world";
-	sendMessage(recipientid,reply);
+	sendMessage(recipientid,{text: reply});
 }
 //process.env.PAGE_ACCESS_TOKEN
 function sendMessage(recipientId, message) {
