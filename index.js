@@ -123,6 +123,13 @@ app.post('/webhook', function (req, res) {
         		handleScheduleReminders(event.sender.id,message);
         	}
 
+        	if(event.message.text.indexOf('weather'))
+        	{
+        		console.log('weather');
+        		//handleComplaints(event.sender.id,message);
+        	}
+
+
         	if(cities.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("In cities")
