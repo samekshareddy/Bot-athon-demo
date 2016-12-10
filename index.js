@@ -204,6 +204,7 @@ app.post('/webhook', function (req, res) {
         	{
         		
         		console.log("Valid number");
+        		res.send("You have booked "+number_tickets+" from "+from+" to "+to);
         		number_tickets = event.message.text;
         	message = {
         			"attachment": {
