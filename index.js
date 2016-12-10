@@ -100,7 +100,7 @@ app.post('/webhook', function (req, res) {
         	if(greetings.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("greetings");
-        		res.send(event.message.text + "! We are here to help you find the cheapest flights across the world")
+        		res.send(event.message.text);
         		handleGreeting(event.sender.id,event.message.text);
         		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
         	}
