@@ -98,7 +98,7 @@ app.post('/webhook', function (req, res) {
         	if(event.message.text == 'Find Flights')
         	{
         		console.log("Find Flights");
-        		handleFindFlights(event.sender.id,message);
+        		handleFindFlights(event.sender.id,event.message.text);
 
         	}
 
