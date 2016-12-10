@@ -83,6 +83,8 @@ app.get('/webhook', function (req, res) {
 app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     var reply = "Sorry I did not understand";
+    var to = "";
+    var from = "";
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
@@ -92,12 +94,53 @@ app.post('/webhook', function (req, res) {
         		handleGreeting(event.sender.id,event.message.text);
         		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
         	}
+
+        	if(event.message.text == 'Find Flights')
+        	{
+        		console.log("Find Flights");
+        		handleFindFlights(event.sender.id,message);
+
+        	}
+
+        	if(event.message.text == 'Add complaints/Give Feedback')
+        	{
+        		console.log('Add complaints/ Give Feedback');
+        		handleComplaints(event.sender.id,message);
+        	}
+
+        	if(event.message.text == 'Schedule Reminders')
+        	{
+        		console.log('Schedule Reminders');
+        		handleScheduleReminders(event.sender.id,message);
+        	}
+
+        	if(event.message.text.indexOf('Delhi') > -1 || event.message.text.indexOf('Bangalore') > -1)
+        	{
+        		var cities = event.message.text.toString().split(",");
+        		from = cities[0];
+        		to = cities[1];
+        		sendMessage(sender.message.id,from+" "+to);
+        	}
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
     }
     res.sendStatus(200);
 });
 
+function handleFindFlights(recipientid,message)
+{
+	sendMessage(recipientid,'text: Please provide source and destination');
+}
+
+function handleComplaints(recipientid,message)
+{
+
+}
+
+function handleScheduleReminders(recipientid,message)
+{
+
+}
 
 function handleGreeting(recipientid,message)
 {
@@ -110,17 +153,23 @@ function handleGreeting(recipientid,message)
         json: {
             recipient: {id: recipientid},
             message: {
-    			"text":"Pick a color:",
+    			"text":"Pick an option",
     			"quick_replies":[
       			{
         			"content_type":"text",
-        			"title":"Red",
-        			"payload":"Red"
+        			"title":"Find Flights",
+        			"payload":"Find Flights"
       			},
       			{
         			"content_type":"text",
-        			"title":"Green",
-        			"payload":"Red",
+        			"title":"Add complaints/Give Feedback",
+        			"payload":"Add complaints/Give Feedback",
+        			
+      			},
+      			{
+        			"content_type":"text",
+        			"title":"Schedule Reminders",
+        			"payload":"Schedule Reminders",
         			
       			}
     		]
