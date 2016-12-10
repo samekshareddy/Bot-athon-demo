@@ -89,7 +89,7 @@ app.post('/webhook', function (req, res) {
         	if(greetings.indexOf(event.message.text) > -1)
         	{
         		console.log("greetings");
-        		handleGreeting(event.message.text);
+        		handleGreeting(event.sender.id,event.message.text);
         		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
         	}
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
@@ -99,10 +99,10 @@ app.post('/webhook', function (req, res) {
 });
 
 
-function handleGreeting(message)
+function handleGreeting(recipientid,message)
 {
 	var reply = reply = event.message.text + "We are here to help you find the cheapest flights across the world";
-	sendMessage(event.sender.id,reply);
+	sendMessage(recipientid,reply);
 }
 //process.env.PAGE_ACCESS_TOKEN
 function sendMessage(recipientId, message) {
