@@ -76,3 +76,33 @@ app.get('/webhook', function (req, res) {
     }
 });
 
+app.post('/webhook', function (req, res) {
+    var events = req.body.entry[0].messaging;
+    for (i = 0; i < events.length; i++) {
+        var event = events[i];
+        if (event.message && event.message.text) {
+            sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+        }
+    }
+    res.sendStatus(200);
+});
+
+//process.env.PAGE_ACCESS_TOKEN
+function sendMessage(recipientId, message) {
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: 'EAAIPsW7F6tMBAElxTAq2i6ypobzJF1AQIweS1zZBCZCmzc80GSSQiM8n0fyuWKZB4H1Ci90cBSrZBzamp0qcHGXMAr2Xy4JRf6FDeghf1TFGZCrWZBXffZAwi1mrmm0Q1Y6uaeNEPUcCMUmOl67DkwZAO8ThBwrNmRs563n9vHsMoAZDZD'  },
+        method: 'POST',
+        json: {
+            recipient: {id: recipientId},
+            message: message,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
+};
+
