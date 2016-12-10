@@ -134,6 +134,7 @@ app.post('/webhook', function (req, res) {
 		  		{
 		  			city = event.message.text.substring(event.message.text.toLowerCase().indexOf(value));
 		  			sendMessage(event.sender.id,{text: 'Weather in '+city+' is 27 degrees'});
+		  			res.send('Weather in '+city+' is 27 degrees');
 		  		}
 				});
         		//handleComplaints(event.sender.id,message);
@@ -141,6 +142,7 @@ app.post('/webhook', function (req, res) {
             
             if(event.message.text.toLowerCase().indexOf('cancel') > -1 || event.message.text.indexOf('tickets') > -1)
             {
+            	
             	sendMessage(event.sender.id,{text: "Follow this link to cancel the ticket: http://cancelticket.com"});
             }
 
