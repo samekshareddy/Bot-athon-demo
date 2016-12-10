@@ -144,7 +144,7 @@ function handleScheduleReminders(recipientid,message)
 
 function handleGreeting(recipientid,message)
 {
-	var reply = reply = message + "! We are here to help you find the cheapest flights across the world";
+	var reply = {text:message + "! We are here to help you find the cheapest flights across the world"};
 	//sendMessage(recipientid,{text: reply});
 
 	request({
@@ -152,8 +152,8 @@ function handleGreeting(recipientid,message)
         qs: {access_token: PAGE_ACCESS_TOKEN },
         method: 'POST',
         json: {
-            recipient: {id: recipientId},
-            message: message,
+            recipient: {id: recipientid},
+            message: reply
         }
     }, function(error, response, body) {
         
