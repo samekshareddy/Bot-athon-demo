@@ -176,7 +176,7 @@ app.post('/webhook', function (req, res) {
                                 }, {
                                 "type": "postback",
                                 "title": "I like this",
-                                "payload": "User " + event.send.id + " likes kitten " + "https://postimg.org/image/s20y5am5p/",
+                                "payload": "User " + event.sender.id + " likes kitten " + "https://postimg.org/image/s20y5am5p/",
                             }]
                         }]
                     }
