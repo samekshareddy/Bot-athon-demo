@@ -123,9 +123,19 @@ app.post('/webhook', function (req, res) {
         		handleScheduleReminders(event.sender.id,message);
         	}
 
-        	if(event.message.text.indexOf('weather') > -1)
+        	if(event.message.text.indexOf('weather') > -1 || event.message.text.indexOf('temperature') > -1 || event.message.text.indexOf('feel') > -1)
         	{
         		console.log('weather');
+        		var city = "";
+
+		      	cities.forEach(function(value){
+		  		console.log(value);
+		  		if(event.message.text.toLowerCase().indexOf(value) > -1)
+		  		{
+		  			city = event.message.text.substring(event.message.text.toLowerCase().indexOf(value));
+		  			sendMessage(event.sender.id,{text: 'Weather at'+city+'27 degrees'});
+		  		}
+				});
         		//handleComplaints(event.sender.id,message);
         	}
 
