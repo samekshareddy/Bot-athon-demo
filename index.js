@@ -161,7 +161,7 @@ app.post('/webhook', function (req, res) {
         		console.log("Valid number");
         		number_tickets = event.message.text;
         		message = {
-                "attachment": {
+                "attachment": [{
                     "type": "template",
                     "payload": {
                         "template_type": "generic",
@@ -175,7 +175,7 @@ app.post('/webhook', function (req, res) {
                                 "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_1.jpg",
                             }]
                         }]
-                    },
+                    }},
                     {
                     "type": "template",
                     "payload": {
@@ -190,7 +190,7 @@ app.post('/webhook', function (req, res) {
                                 "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_2.jpg",
                             }]
                         }]
-                    },
+                    }},
                     {
                     "type": "template",
                     "payload": {
@@ -206,7 +206,7 @@ app.post('/webhook', function (req, res) {
                             }]
                         }]
                     }
-                }
+                }]
 
             };
         	sendMessage(event.sender.id,message);
