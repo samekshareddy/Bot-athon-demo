@@ -207,14 +207,14 @@ app.post('/webhook', function (req, res) {
       	console.log('in weather');
       	var city = "";
 
-      	cities.forEach(function(value){
+      	/*cities.forEach(function(value){
   		console.log(value);
   		if(event.message.text.toLowerCase().indexOf(value) > -1)
   		{
   			city = event.message.text.substring(event.message.text.toLowerCase().indexOf(value));
   			sendMessage(event.sender.id,{text: 'Weather at'+city+'27 degrees'});
   		}
-		});
+		});*/
 
       }
 
