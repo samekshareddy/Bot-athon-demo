@@ -122,6 +122,7 @@ app.post('/webhook', function (req, res) {
 
         	if(event.message.text.toLowerCase().indexOf('delhi') > -1 || event.message.text.toLowerCase().indexOf('bangalore') > -1)
         	{
+        		console.log("In cities")
         		if(flag==0)
         		{
         			from =event.message.text;
