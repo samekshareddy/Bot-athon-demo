@@ -182,7 +182,7 @@ app.post('/webhook', function (req, res) {
                     }
                 }
             };
-        	sendMessage(event.send.id,message);
+        	sendMessage(event.sender.id,message);
         	sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
         	}
 
