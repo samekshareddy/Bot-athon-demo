@@ -119,7 +119,7 @@ app.post('/webhook', function (req, res) {
         		var cities = event.message.text.toString().split(",");
         		from = cities[0];
         		to = cities[1];
-        		sendMessage(sender.message.id,{text:from+" "+to});
+        		sendMessage(event.sender.id,{text:from+" "+to});
         	}
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
