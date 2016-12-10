@@ -129,7 +129,7 @@ app.post('/webhook', function (req, res) {
 
 function handleFindFlights(recipientid,message)
 {
-	sendMessage(recipientid,'Please provide source and destination');
+	sendMessage(recipientid,{text:"Please provide source and destination"});
 }
 
 function handleComplaints(recipientid,message)
