@@ -202,7 +202,7 @@ app.post('/webhook', function (req, res) {
         sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
       }
 
-      if(event.message.text == 'how is the weather at delhi')
+      /*if(event.message.text == 'how is the weather at delhi')
       	//|| event.message.text.toLowerCase().indexOf('temperature') || event.message.text.toLowerCase().indexOf('feel') )
       {
       	console.log('in weather');
@@ -215,9 +215,9 @@ app.post('/webhook', function (req, res) {
   			city = event.message.text.substring(event.message.text.toLowerCase().indexOf(value));
   			sendMessage(event.sender.id,{text: 'Weather at'+city+'27 degrees'});
   		}
-		});*/
+		});
 
-      }
+      }*/
 
       else
       {
