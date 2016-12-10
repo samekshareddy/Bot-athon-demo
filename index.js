@@ -100,6 +100,7 @@ app.post('/webhook', function (req, res) {
         	if(greetings.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("greetings");
+        		res.send(event.message.text + "! We are here to help you find the cheapest flights across the world")
         		handleGreeting(event.sender.id,event.message.text);
         		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
         	}
@@ -240,7 +241,7 @@ app.post('/webhook', function (req, res) {
      if(event.postback) {
         //text = JSON.stringify(event.postback)
         sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
-        
+
       }
 
       /*if(event.message.text == 'how is the weather at delhi')
