@@ -171,17 +171,17 @@ app.post('/webhook', function (req, res) {
                     				"image_url": "https://s30.postimg.org/s20y5am5p/20_55_1.jpg",
                     				"buttons": [{
                         				"type": "postback",
-                        				"title": "Postback",
+                        				"title": "book",
                         				"payload": "Payload for first element in a generic bubble",
                     					}],
                 				}, 
                 				{
                     "title": "Second Flight",
                     "subtitle": "Second Flight",
-                    "image_url": "https://s30.postimg.org/s20y5am5p/20_55_2.jpg",
+                    "image_url": "https://s30.postimg.org/i5zv5ngdp/20_55_2.jpg",
                     "buttons": [{
                         "type": "postback",
-                        "title": "Postback",
+                        "title": "book",
                         "payload": "Payload for second element in a generic bubble",
                     }],
                 }]
@@ -189,12 +189,18 @@ app.post('/webhook', function (req, res) {
         }
     }
         	sendMessage(event.sender.id,message);
-        	sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
+        	//sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
         	}
 
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
     }
+
+    if (event.postback) {
+        let text = JSON.stringify(event.postback)
+        sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
+        continue
+      }
     res.sendStatus(200);
 });
 
