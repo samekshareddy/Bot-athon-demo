@@ -144,17 +144,20 @@ app.post('/webhook', function (req, res) {
             {
             	
             	sendMessage(event.sender.id,{text: "Follow this link to cancel the ticket: http://cancelticket.com"});
+            	res.send("Follow this link to cancel the ticket: http://cancelticket.com");
             }
 
             if(event.message.text.toLowerCase().indexOf('checkin') > -1 || event.message.text.indexOf('e-checkin') > -1)
             {
             	sendMessage(event.sender.id, {text: "The web checkin facility will be available starting 48 hours prior dep time. Click here to know status: http://checkin.com"});
-
+            	res.send("The web checkin facility will be available starting 48 hours prior dep time. Click here to know status: http://checkin.com");
             }
 
             if(event.message.text.toLowerCase().indexOf('documents') > -1 || event.message.text.indexOf('carry') > -1)
             {
+            	
             	sendMessage(event.sender.id,{text: "Carry photo id along with e ticket"});
+            	res.send("Carry photo id along with e ticket");
             }
 
         	if(cities.indexOf(event.message.text.toLowerCase()) > -1)
@@ -164,12 +167,14 @@ app.post('/webhook', function (req, res) {
         		{
         			from =event.message.text;
         			sendMessage(event.sender.id,{text: "Please enter your destination"});
+        			res.send("Please enter your destination");
         			flag = 1;
         		}
         		else
         		{
         			to = event.message.text;
         			sendMessage(event.sender.id,{text: "When are you leaving"});
+        			res.send("When are you leaving");
         			flag=0;
         		}
         		/*var cities = event.message.text.toString().split(" ");
@@ -189,6 +194,7 @@ app.post('/webhook', function (req, res) {
         		when = event.message.text;
 
         		sendMessage(event.sender.id,{text: "No of tickets:"})
+        		res.send("No of tickets");
         	}
         	if(!isNaN(event.message.text) || text_numbers.indexOf(event.message.text) > -1)
         	{
@@ -224,7 +230,7 @@ app.post('/webhook', function (req, res) {
         }
     }
         	sendMessage(event.sender.id,message);
-        	//sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
+        	        	//sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
         	}
 
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
@@ -234,6 +240,7 @@ app.post('/webhook', function (req, res) {
      if(event.postback) {
         //text = JSON.stringify(event.postback)
         sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
+        
       }
 
       /*if(event.message.text == 'how is the weather at delhi')
