@@ -108,7 +108,10 @@ app.post('/webhook', function (req, res) {
         	if(event.message.text == 'Find Flights')
         	{
         		console.log("Find Flights");
-        		handleFindFlights(event.sender.id,event.message.text);
+
+        		//handleFindFlights(event.sender.id,event.message.text);
+        		sendMessage(recipientid,{text:"Please provide source"});
+        		res.send("Please provide source");
 
         	}
 
@@ -271,6 +274,7 @@ app.post('/webhook', function (req, res) {
 function handleFindFlights(recipientid,message)
 {
 	sendMessage(recipientid,{text:"Please provide source"});
+
 }
 
 function handleComplaints(recipientid,message)
