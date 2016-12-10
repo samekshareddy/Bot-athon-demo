@@ -132,7 +132,7 @@ app.post('/webhook', function (req, res) {
         		else
         		{
         			to = event.message.text;
-        			//sendMessage(event.sender.id,{text: "Please enter the number of tickets"});
+        			sendMessage(event.sender.id,{text: "When are you leaving"});
         			flag=0;
         		}
         		/*var cities = event.message.text.toString().split(" ");
