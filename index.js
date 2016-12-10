@@ -167,20 +167,49 @@ app.post('/webhook', function (req, res) {
                         "template_type": "generic",
                         "elements": [{
                             "title": "Flight",
-                            "subtitle": "https://postimg.org/image/s20y5am5p/",
-                            "image_url": "https://postimg.org/image/s20y5am5p/" ,
+                            "subtitle": "Flight",
+                            "image_url": "https://s30.postimg.org/s20y5am5p/20_55_1.jpg" ,
                             "buttons": [{
-                                "type": "web_url",
-                                "url": "https://postimg.org/image/s20y5am5p/",
-                                "title": "Show kitten"
-                                }, {
                                 "type": "postback",
                                 "title": "I like this",
-                                "payload": "User " + event.sender.id + " likes kitten " + "https://postimg.org/image/s20y5am5p/",
+                                "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_1.jpg",
+                            }]
+                        }]
+                    }
+                },
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": "Flight",
+                            "subtitle": "Flight",
+                            "image_url": "https://s30.postimg.org/s20y5am5p/20_55_2.jpg" ,
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "Book",
+                                "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_2.jpg",
+                            }]
+                        }]
+                    }
+                },
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": "Flight",
+                            "subtitle": "Flight",
+                            "image_url": "https://s30.postimg.org/s20y5am5p/20_55_3.jpg" ,
+                            "buttons": [{
+                                "type": "postback",
+                                "title": "Book",
+                                "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_3.jpg",
                             }]
                         }]
                     }
                 }
+
             };
         	sendMessage(event.sender.id,message);
         	sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
