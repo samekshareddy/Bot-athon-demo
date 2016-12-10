@@ -160,55 +160,34 @@ app.post('/webhook', function (req, res) {
         		
         		console.log("Valid number");
         		number_tickets = event.message.text;
-        		message = {
-                "attachment": [{
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [{
-                            "title": "Flight",
-                            "subtitle": "Flight",
-                            "image_url": "https://s30.postimg.org/s20y5am5p/20_55_1.jpg" ,
-                            "buttons": [{
-                                "type": "postback",
-                                "title": "I like this",
-                                "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_1.jpg",
-                            }]
-                        }]
-                    }},
-                    {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [{
-                            "title": "Flight",
-                            "subtitle": "Flight",
-                            "image_url": "https://s30.postimg.org/s20y5am5p/20_55_2.jpg" ,
-                            "buttons": [{
-                                "type": "postback",
-                                "title": "Book",
-                                "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_2.jpg",
-                            }]
-                        }]
-                    }},
-                    {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [{
-                            "title": "Flight",
-                            "subtitle": "Flight",
-                            "image_url": "https://s30.postimg.org/s20y5am5p/20_55_3.jpg" ,
-                            "buttons": [{
-                                "type": "postback",
-                                "title": "Book",
-                                "payload": "User " + event.sender.id + " likes kitten " + "https://s30.postimg.org/s20y5am5p/20_55_3.jpg",
-                            }]
-                        }]
-                    }
+        	messageData = {
+        			"attachment": {
+            					"type": "template",
+            					"payload": {
+                				"template_type": "generic",
+                				"elements": [{
+                    				"title": "First Flight",
+                    				"subtitle": "Element #1 of an hscroll",
+                    				"image_url": "https://s30.postimg.org/s20y5am5p/20_55_1.jpg",
+                    				"buttons": [{
+                        				"type": "postback",
+                        				"title": "Postback",
+                        				"payload": "Payload for first element in a generic bubble",
+                    					}],
+                				}, 
+                				{
+                    "title": "Second Flight",
+                    "subtitle": "Second Flight",
+                    "image_url": "https://s30.postimg.org/s20y5am5p/20_55_2.jpg",
+                    "buttons": [{
+                        "type": "postback",
+                        "title": "Postback",
+                        "payload": "Payload for second element in a generic bubble",
+                    }],
                 }]
-
-            };
+            }
+        }
+    }
         	sendMessage(event.sender.id,message);
         	sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
         	}
