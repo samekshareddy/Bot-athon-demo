@@ -138,7 +138,22 @@ app.post('/webhook', function (req, res) {
 				});
         		//handleComplaints(event.sender.id,message);
         	}
+            
+            if(event.message.text.toLowerCase().indexOf('cancel') > -1 || event.message.text.indexOf('tickets') > -1)
+            {
+            	sendMessage(event.sender.id,{text: "Follow this link to cancel the ticket: http://cancelticket.com"});
+            }
 
+            if(event.message.text.toLowerCase().indexOf('checkin') > -1 || event.message.text.indexOf('e-checkin') > -1)
+            {
+            	sendMessage(event.sender.id, {text: "The web checkin facility will be available starting 48 hours prior dep time. Click here to know status: http://checkin.com"});
+
+            }
+
+            if(event.message.text.toLowerCase().indexOf('documents') > -1 || event.message.text.indexOf('carry') > -1)
+            {
+            	sendMessage(event.sender.id,{text: "Carry photo id along with e ticket"});
+            }
 
         	if(cities.indexOf(event.message.text.toLowerCase()) > -1)
         	{
