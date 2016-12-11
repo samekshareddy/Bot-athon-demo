@@ -195,7 +195,7 @@ app.post('/webhook', function (req, res) {
         	}
 
         	
-        	if(!isNaN(event.message.text) || text_numbers.indexOf(event.message.text) > -1)
+        	else if(!isNaN(event.message.text) || text_numbers.indexOf(event.message.text) > -1)
         	{
         		
         		console.log("Valid number");
