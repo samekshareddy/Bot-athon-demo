@@ -94,9 +94,11 @@ app.post('/webhook', function (req, res) {
     var events = req.body.entry[0].messaging;
     var reply = "Sorry I did not understand";
     
-    for (i = 0; i < events.length; i++) {
+    for (i = 0; i < events.length; i++) 
+    {
         var event = events[i];
-        if (event.message && event.message.text) {
+        if (event.message && event.message.text) 
+        {
         	if(greetings.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("greetings");
@@ -105,7 +107,7 @@ app.post('/webhook', function (req, res) {
         		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
         	}
 
-        	if(event.message.text == 'Find Flights')
+        	else if(event.message.text == 'Find Flights')
         	{
         		console.log("Find Flights");
 
@@ -115,19 +117,19 @@ app.post('/webhook', function (req, res) {
 
         	}
 
-        	if(event.message.text == 'Add complaints/Give Feedback')
+        	else if(event.message.text == 'Add complaints/Give Feedback')
         	{
         		console.log('Add complaints/ Give Feedback');
         		handleComplaints(event.sender.id,message);
         	}
 
-        	if(event.message.text == 'Schedule Reminders')
+        	else if(event.message.text == 'Schedule Reminders')
         	{
         		console.log('Schedule Reminders');
         		handleScheduleReminders(event.sender.id,message);
         	}
 
-        	if(event.message.text.toLowerCase().indexOf('weather') > -1 || event.message.text.indexOf('temperature') > -1 || event.message.text.indexOf('feel') > -1)
+        	else if(event.message.text.toLowerCase().indexOf('weather') > -1 || event.message.text.indexOf('temperature') > -1 || event.message.text.indexOf('feel') > -1)
         	{
         		console.log('weather');
         		var city = "";
@@ -144,27 +146,27 @@ app.post('/webhook', function (req, res) {
         		//handleComplaints(event.sender.id,message);
         	}
             
-            if(event.message.text.toLowerCase().indexOf('cancel') > -1 || event.message.text.indexOf('tickets') > -1)
+            else if(event.message.text.toLowerCase().indexOf('cancel') > -1 || event.message.text.indexOf('tickets') > -1)
             {
             	
             	sendMessage(event.sender.id,{text: "Follow this link to cancel the ticket: http://cancelticket.com"});
             	res.send("Follow this link to cancel the ticket: http://cancelticket.com");
             }
 
-            if(event.message.text.toLowerCase().indexOf('checkin') > -1 || event.message.text.indexOf('e-checkin') > -1)
+            else if(event.message.text.toLowerCase().indexOf('checkin') > -1 || event.message.text.indexOf('e-checkin') > -1)
             {
             	sendMessage(event.sender.id, {text: "The web checkin facility will be available starting 48 hours prior dep time. Click here to know status: http://checkin.com"});
             	res.send("The web checkin facility will be available starting 48 hours prior dep time. Click here to know status: http://checkin.com");
             }
 
-            if(event.message.text.toLowerCase().indexOf('documents') > -1 || event.message.text.indexOf('carry') > -1)
+            else if(event.message.text.toLowerCase().indexOf('documents') > -1 || event.message.text.indexOf('carry') > -1)
             {
             	
             	sendMessage(event.sender.id,{text: "Carry photo id along with e ticket"});
             	res.send("Carry photo id along with e ticket");
             }
 
-        	if(cities.indexOf(event.message.text.toLowerCase()) > -1)
+        	else if(cities.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("In cities")
         		if(flag==0)
@@ -192,24 +194,19 @@ app.post('/webhook', function (req, res) {
         		//cites.push(event.message.text);
         	}
 
-        	if(!isNaN(new Date(event.message.text).getDate()))
-        	{
-        		console.log("Valid date");
-        		when = event.message.text;
-
-        		sendMessage(event.sender.id,{text: "No of tickets:"})
-        		res.send("No of tickets");
-        	}
+        	
         	if(!isNaN(event.message.text) || text_numbers.indexOf(event.message.text) > -1)
         	{
         		
         		console.log("Valid number");
         		res.send("You have booked "+number_tickets+" from "+from+" to "+to);
         		number_tickets = event.message.text;
-        	message = {
-        			"attachment": {
+        		message = {
+        			"attachment": 
+        			{
             					"type": "template",
-            					"payload": {
+            					"payload": 
+            					{
                 				"template_type": "generic",
                 				"elements": [{
                     				"title": "First Flight",
@@ -232,21 +229,40 @@ app.post('/webhook', function (req, res) {
                     }],
                 }]
             }
+           
         }
+
     }
         	sendMessage(event.sender.id,message);
         	        	//sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" From: "+from+" To:"+to});
         	}
 
+        	else if(!isNaN(new Date(event.message.text).getDate()))
+        	{
+        		console.log("Valid date");
+        		when = event.message.text;
+
+        		sendMessage(event.sender.id,{text: "No of tickets:"})
+        		res.send("No of tickets");
+        	}
+
+        	else if(event.postback) 
+        	{
+        //text = JSON.stringify(event.postback)
+        		sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
+
+      		}
+
+      		else
+      		{
+      			sendMessage(event.sender.id,{text: "Sorry i havent understood"});
+      		}
+
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
     }
 
-     if(event.postback) {
-        //text = JSON.stringify(event.postback)
-        sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
-
-      }
+     
 
       /*if(event.message.text == 'how is the weather at delhi')
       	//|| event.message.text.toLowerCase().indexOf('temperature') || event.message.text.toLowerCase().indexOf('feel') )
