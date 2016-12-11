@@ -107,7 +107,7 @@ app.post('/webhook', function (req, res) {
         		//reply = event.message.text + "We are here to help you find the cheapest flights across the world"
         	}
 
-        	else if(event.message.text == 'Find Flights')
+        	else if(event.message.text.toLowerCase() == 'find flights')
         	{
         		console.log("Find Flights");
 
