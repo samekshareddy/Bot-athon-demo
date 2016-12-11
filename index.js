@@ -247,15 +247,11 @@ app.post('/webhook', function (req, res) {
         	}
         	else
       		{
+      			console.log("Not understood")
       			sendMessage(event.sender.id,{text: "Sorry i havent understood"});
       		}
 
-        	if(event.postback) 
-        	{
-        //text = JSON.stringify(event.postback)
-        		sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
-
-      		}
+        	
 
       		
 
@@ -264,7 +260,13 @@ app.post('/webhook', function (req, res) {
     }
 
      
+    	if(event.postback) 
+        	{
+        //text = JSON.stringify(event.postback)
+        		console.log("postback")
+        		sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
 
+      		}
       /*if(event.message.text == 'how is the weather at delhi')
       	//|| event.message.text.toLowerCase().indexOf('temperature') || event.message.text.toLowerCase().indexOf('feel') )
       {
