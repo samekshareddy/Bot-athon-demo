@@ -58,7 +58,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 var flag = 0;
-var cities =['dilli','delhi','bangalore','bglr','westeros'];
+var cities =['dilli','delhi','bangalore','bglr','westeros','chennai'];
 var weather = ['temperature','feel','weather'];
 var to = "";
 var from = "";
@@ -169,7 +169,7 @@ app.post('/webhook', function (req, res) {
         	else if(cities.indexOf(event.message.text.toLowerCase()) > -1)
         	{
         		console.log("In cities")
-        		if(flag==0)
+        		if(flag == 0)
         		{
         			from =event.message.text;
         			sendMessage(event.sender.id,{text: "Please enter your destination"});
