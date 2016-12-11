@@ -245,18 +245,19 @@ app.post('/webhook', function (req, res) {
         		sendMessage(event.sender.id,{text: "No of tickets:"})
         		res.send("No of tickets");
         	}
+        	else
+      		{
+      			sendMessage(event.sender.id,{text: "Sorry i havent understood"});
+      		}
 
-        	else if(event.postback) 
+        	if(event.postback) 
         	{
         //text = JSON.stringify(event.postback)
         		sendMessage(event.sender.id,{text:"You have booked "+number_tickets+" from "+from+" to "+to});
 
       		}
 
-      		else
-      		{
-      			sendMessage(event.sender.id,{text: "Sorry i havent understood"});
-      		}
+      		
 
             //sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
         }
